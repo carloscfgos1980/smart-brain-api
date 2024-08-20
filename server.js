@@ -1,21 +1,27 @@
 const express = require('express');
+require('dotenv').config();
 const bodyParser = require('body-parser'); // latest version of exressJS now comes with Body-Parser!
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
+
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
+const myPwd = process.env.MY_PASSWORD;
+console.log(myPwd);
+
+
 const db = knex({
   // connect to your own database here:
   client: 'pg',
   connection: {
     host : '127.0.0.1',
-    user : 'aneagoie',
-    password : '',
+    user : 'postgres',
+    password : myPwd,
     database : 'smart-brain'
   }
 });
